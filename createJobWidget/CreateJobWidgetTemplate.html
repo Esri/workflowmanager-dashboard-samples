@@ -1,13 +1,22 @@
 <div style="margin: 10px 5px;">
-    <div class="row">
-        <label>Job Type:</label>
-        <input data-dojo-attach-point="cboJobTypes">
-    </div>
-    <div class="row">
-        <button data-dojo-attach-point="btnDrawAoiAttach" class="btn">Draw Aoi</button>
-        <button data-dojo-attach-point="btnCreateJobAttach" class="btn">Create Job</button>
-    </div>
-    <div class="row">
-        <textarea id="createHistory"/>
+    <div>
+        <span data-dojo-attach-point="progressScreen" style="display: none;">
+            <h1 style="text-align:center;">Creating...</h1>
+        </span>
+        <span data-dojo-attach-point="startUpScreen">
+            <div class="row">
+                <label>Job Type:</label>
+                <input data-dojo-attach-point="cboJobTypes">
+            </div>
+            <div class="row" style="margin: 5px 0px 5px 0px">
+
+                <button data-dojo-attach-point="btnDrawAoiAttach" class="btn">Draw Aoi</button>
+                <button data-dojo-attach-point="btnCreateJobAttach" class="btn">Create Job</button>
+            </div>
+            <div class="row">
+                <textarea id="createHistory"/>
+            </div>
+        </span>
+
     </div>
 </div>
