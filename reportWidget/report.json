@@ -1,0 +1,11 @@
+{
+  "type": "Widget",
+  "title": "Report Widget",
+  "description": "A widget that shows report information about a Workflow Database",
+  "thumbnailPath": "job.png",
+  "useDataFromView": false,
+  "runtime": {
+    "path": "report.html"
+  },
+  "credits": "Esri"
+}

@@ -1,0 +1,32 @@
+.pie,
+.stacked {
+	text-shadow: 0 1px 0 white;
+}
+.pie svg,
+.pie > div {
+	background: url(images/pie-background-extra-large.png) center center no-repeat;
+}
+
+.pieSlice-label {
+	color: #888888;
+	float: left;
+	text-align: left;
+	width: 100%;
+	display: none;
+}
+
+.table{
+    width: 100%
+}
+
+.dojoxLegendNode{
+    width:200px;
+}
+
+.pie-container {
+	opacity: 1; 
+
+	clear: both; 
+	margin-bottom: 10px;	
+    width: 100%;
+}

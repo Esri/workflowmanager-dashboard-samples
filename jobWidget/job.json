@@ -1,0 +1,14 @@
+{
+  "type": "Widget",
+  "title": "Job Widget",
+  "description": "A widget that shows information about a job",
+  "thumbnailPath": "job.png",
+  "useDataFromView": true,
+  "runtime": {
+    "path": "job.html"
+  },
+  "configuration": {
+    "requireDataSource": true
+  },
+  "credits": "Esri"
+}

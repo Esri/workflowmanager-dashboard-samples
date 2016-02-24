@@ -1,0 +1,15 @@
+{
+  "type": "Widget",
+  "title": "Create Job Widget",
+  "description": "A widget that creates a job",
+  "thumbnailPath": "job.png",
+  "useDataFromView": true,
+  "configuration": {
+    "requireMapWidget": true
+  },
+  "runtime": {
+    "path": "createJob.html"
+  },
+
+  "credits": "Esri"
+}
