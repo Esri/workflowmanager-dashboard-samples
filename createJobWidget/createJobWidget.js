@@ -114,13 +114,17 @@ define([
 
                     para.jobTypeId = self.jobTypesSelect.get("value");
                     para.loi = self.aoi;
+                    self.startUpScreen.style.display = "none";
+                    self.progressScreen.style.display = "";
                     self.jobTask.createJob(para, self.userName, function (data) {
                         var event = "\nJob: " + data[0] + " created."
+                        self.startUpScreen.style.display = "";
+                        self.progressScreen.style.display = "none";
                         self.createHistory.set("value", self.createHistory.value + event);
+                        self.aoi = null;
+                        self.graphicsLayerProxy.clear();
 
                     });
-                    self.aoi = null;
-                    self.graphicsLayerProxy.clear();
                 }
             }, this.btnCreateJobAttach);
             this.btnCreateJob.startup();
@@ -178,10 +182,8 @@ define([
             this.btnDrawAoi.set("label", "Draw Aoi");
             this.deactivateDrawingToolbar(this.mapWidgetProxy);
 
-        },
-
+        }
     });
-
 });
 
 
