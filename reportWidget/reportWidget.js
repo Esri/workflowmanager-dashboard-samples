@@ -52,6 +52,13 @@ define([
          *   - http://workflowsample.esri.com/doc/javascript/jsapi/WMJobTask.html#queryJobsByID
          **/
 
+        getJobsByQueryID: function (queryID) {
+            var self = lang.hitch(this);
+            //query function
+            self.wmJobTask.queryJobsByID(queryID, settings.userName, lang.hitch(self, function (data) {
+                self.populateQueryResults(data);
+            }));
+        },
 
         // ** End Demo 1 **/
 

@@ -38,7 +38,6 @@ define([
              Query,
              templateString,
              arrayUtil,
-
              Graphic,
              SimpleFillSymbol,
              WMJobTask,
@@ -48,7 +47,6 @@ define([
              JobCreationParameters,
              GeometryService,
              settings,
-
              Button,
              FilteringSelect,
              Memory,
@@ -118,7 +116,29 @@ define([
                      *   - http://workflowsample.esri.com/doc/rest/index.html?createjob.html
                      */
 
-                    /** End Example 3 **/
+                    var creationParams = new JobCreationParameters();
+                    creationParams.jobTypeId = self.jobTypesSelect.get("value");
+                    creationParams.loi = self.aoi;
+
+                    // Display status
+                    self.startUpScreen.style.display = "none";
+                    self.progressScreen.style.display = "";
+
+                    self.jobTask.createJob(creationParams, self.userName, function (data) {
+                        // Hide status
+                        self.startUpScreen.style.display = "";
+                        self.progressScreen.style.display = "none";
+
+                        // Show in the list of created jobs
+                        var event = "\nJob: " + data[0] + " created."
+                        self.createHistory.set("value", self.createHistory.value + event);
+
+                        // Clear out the old AOI
+                        self.aoi = null;
+                        self.graphicsLayerProxy.clear();
+
+                    });
+                    /** End Example 2b **/
                 }
             }, this.btnCreateJobAttach);
             this.btnCreateJob.startup();
@@ -132,6 +152,18 @@ define([
              *
              *  Also a new method for just job types available to the user at 10.4
              */
+
+            this.wmConfigurationTask.getServiceInfo(function (response) {
+                var activeJobTypes = dojo.filter(response.jobTypes, function (item) {
+                    return item.state == Enum.JobTypeState.ACTIVE;
+                });
+                self.jobTypesSelect.set("store", new Memory({data: activeJobTypes, idProperty: "id"}));
+                if (activeJobTypes.length > 0) {
+                    self.jobTypesSelect.set("disabled", false);
+                    self.jobTypesSelect.set("value", activeJobTypes[0].id);  // by default select first item
+                    self.btnCreateJob.set("disabled", false);
+                }
+            });
 
             /** End Example 2a **/
 
@@ -164,6 +196,7 @@ define([
             function storeAOi(geometries) {
                 self.aoi = geometries[0];
             }
+
             /** End example 2c **/
 
             this.inputGraphic.setGeometry(graphic);

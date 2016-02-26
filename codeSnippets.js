@@ -99,12 +99,12 @@ checkCanRunStep: function (step) {
     var self = lang.hitch(this);
     self.canRunStep = false;
 
-    if (self.currentJob.assignedTo !== settings.user) {
+    if (self.currentJob.assignedTo !== settings.userName) {
         return;
     }
 
     //Use the workflowTask to check if a step can be run or not
-    self.workflowTask.canRunStep(self.currentJob.id, step.id, settings.user,
+    self.workflowTask.canRunStep(self.currentJob.id, step.id, settings.userName,
         function (stepStatus) {
             if (stepStatus == Enum.StepRunnableStatus.CAN_RUN) {
                 self.canRunStep = true;
@@ -118,16 +118,14 @@ checkCanRunStep: function (step) {
     );
 },
 
-//
-//Check if step can be marked as done
-//
+
 checkCanMarkStepAsDone: function (step) {
     this.canMarkStepAsDone = (step.canSkip || step.hasBeenExecuted
-        || (step.stepType.executionType == Enum.StepExecutionType.PROCEDURAL)) && this.currentJob.assignedTo === settings.user;
+        || (step.stepType.executionType == Enum.StepExecutionType.PROCEDURAL)) && this.currentJob.assignedTo === settings.userName;
 
     // disable the mark as done button as needed
     this.markBtn.setDisabled(!(this.canMarkStepAsDone));
-}
+},
 // </editor-fold>
 
 // <editor-fold desc="Example 3d - Execute/mark as complete">
@@ -136,7 +134,7 @@ executeStep: function () {
 
     var jobId = self.currentJob.id;
     var stepIds = [self.currentStep.id];
-    self.workflowTask.executeSteps(jobId, stepIds, settings.user, false,
+    self.workflowTask.executeSteps(jobId, stepIds, settings.userName, false,
         function (data) {
             // check for any execution errors
             if (data != null && data.length > 0) {
@@ -154,14 +152,11 @@ executeStep: function () {
     );
 },
 
-//
-// mark step as complete
-//
 markStepAsComplete: function () {
     var self = lang.hitch(this);
 
     var stepIds = [self.currentStep.id];
-    self.workflowTask.markStepsAsDone(self.currentJob.id, stepIds, settings.user,
+    self.workflowTask.markStepsAsDone(self.currentJob.id, stepIds, settings.userName,
         function (data) {
             self.loadWorkflow();
         },
@@ -169,5 +164,5 @@ markStepAsComplete: function () {
             console.error(error);
         }
     );
-},
+}
 // </editor-fold>
