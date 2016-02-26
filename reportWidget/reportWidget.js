@@ -37,6 +37,7 @@ define([
         //controlling variables
 
         hostReady: function () {
+            /** Create the new Job Task **/
             this.wmJobTask = new WMJobTask(settings.serverUrl);
 
             this.statsPieChart = new PieChart({hasLegend: true}).placeAt(this.pieChartContainer);
@@ -44,14 +45,15 @@ define([
             this.getJobsByQueryID(settings.queryID);
         },
 
-        //needs pop and wmJobTask
-        getJobsByQueryID: function (queryID) {
-            var self = lang.hitch(this);
-            //query function
-            self.wmJobTask.queryJobsByID(queryID, settings.userName, lang.hitch(self, function (data) {
-                self.populateQueryResults(data);
-            }));
-        },
+        /** Demo 1 - Get info from query **/
+
+        /** Documentation
+         *   - http://workflowsample.esri.com/doc/rest/index.html?queryjobs.html
+         *   - http://workflowsample.esri.com/doc/javascript/jsapi/WMJobTask.html#queryJobsByID
+         **/
+
+
+        // ** End Demo 1 **/
 
         populateQueryResults: function (data) {
             // populate the queryResults

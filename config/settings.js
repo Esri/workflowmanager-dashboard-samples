@@ -8,6 +8,7 @@ define([], function () {
 
         // Report settings
         queryID: 2008,
-        currentCategorizedByValue: 2
+        currentCategorizedByValue: 2,
+        jobId: "sde.jtx2.JTX_JOBS_AOI.job_id"
     };
 });

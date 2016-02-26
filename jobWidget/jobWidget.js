@@ -45,6 +45,7 @@ define([
 
             this.jobName.innerHTML = this.defaultJobName;
 
+            //<editor-fold desc="Dijit buttons">
             this.executeBtn = new Button({
                 label: "Execute Step",
                 onClick: function () {
@@ -60,6 +61,7 @@ define([
                 }
             }, this.markAsCompleteButton);
             this.markBtn.startup();
+            //</editor-fold>
 
         },
         dataSourceExpired: function (dataSource) {
@@ -68,10 +70,10 @@ define([
             // to query for the features.
             // The results are in the featureSet
             dataSource.executeQuery(new Query()).then(lang.hitch(this, function (featureSet) {
-
+                // See whether any jobs are selected
                 if (featureSet.features) {
                     var feature = featureSet.features[0];
-                    var jobId = feature.attributes["sde.jtx2.JTX_JOBS_AOI.job_id"];
+                    var jobId = feature.attributes[settings.jobId];
 
                     if (this.currentJob !== null && this.currentJob.id === jobId) {
                         return;
@@ -79,11 +81,14 @@ define([
 
                     console.info("Retrieving job " + jobId);
 
-                    this.jobTask.getJob(jobId, function (data) {
-                        this.currentJob = data;
-                        this.jobName.innerHTML = data.name;
-                        this.loadWorkflow();
-                    }.bind(this));
+                    /** Example 3a - Retrieve basic job info **/
+
+                    /** Documentation
+                     *  - http://workflowsample.esri.com/doc/javascript/jsapi/WMJobTask.html#getJob
+                     *  - http://workflowsample.esri.com/doc/rest/index.html?queryjobs.html
+                     */
+
+                    /** End example 3a **/
 
                 } else {
                     this.currentJob = null;
@@ -98,122 +103,33 @@ define([
             self.executeBtn.setDisabled(true);
             self.markBtn.setDisabled(true);
 
-            // get workflow image using WorkflowTask
+            /** Example 3b - Get Workflow Image and current steps **/
 
-            var jobId = self.currentJob.id;
-            var imageUrl = self.workflowTask.getWorkflowImageURL(jobId);
+            /** Documentation
+             *   - http://workflowsample.esri.com/doc/javascript/jsapi/WMWorkflowTask.html#getWorkflowImageURL
+             *   - http://workflowsample.esri.com/doc/javascript/jsapi/WMWorkflowTask.html#getCurrentSteps
+             */
 
-            // if workflow image already exists, refresh it
-            if ($("#workflowImg").length) {
-                // reload image
-                $("#workflowImg").attr("src", imageUrl + "?timestamp=" + new Date().getTime());
-            } else {
-                var addHTML = "<img name='workflowImg' id='workflowImg' src='" + imageUrl + "' width='275' style='margin-left: 2.88px;' >";
-                $("#workflowContents").append(addHTML);
-            }
-
-            //// get current steps for workflow
-            //self.showProgress();
-            self.workflowTask.getCurrentSteps(jobId,
-                function (steps) {
-                    var currentStep = steps[0];
-                    self.currentStep = currentStep;              // current step
-                    self.checkCanMarkStepAsDone(currentStep);    // check if step can be marked as done
-                    self.checkCanRunStep(currentStep);           // check if step can be run
-                    //self.hideProgress();
-                },
-                function (error) {
-                    showError("Workflow Error", error);
-                    //self.hideProgress();
-                }
-            );
-
-            // show div element
-            $("#workflowContents").show();
+            /** End example 3b **/
         },
 
-        executeStep: function () {
-            var self = lang.hitch(this);
-            //self.clearMessage();
-            //self.showProgress();
+        /** Example 3c - Enable/disable buttons **/
 
-            var jobId = self.currentJob.id;
-            var stepIds = [self.currentStep.id];
-            self.workflowTask.executeSteps(jobId, stepIds, settings.user, false,
-                function (data) {
-                    // check for any execution errors
-                    if (data != null && data.length > 0) {
-                        var result = data[0];
-                        if (result.threwError) {
-                            self.showError("Workflow Error", result.errorDescription);
-                        }
-                    }
-                    // reload workflow
-                    self.loadWorkflow();
-                },
-                function (error) {
-                    //self.hideProgress();
-                    //self.showError("Workflow Error", error);
-                    console.error(error);
-                }
-            );
-        },
+        /** Documentation
+         *   - http://workflowsample.esri.com/doc/javascript/jsapi/WMWorkflowTask.html#canRunStep
+         */
 
-        //
-        // mark step as complete
-        //
-        markStepAsComplete: function () {
-            var self = lang.hitch(this);
-            //self.clearMessage();
-            //self.showProgress();
+        /** End example 3c **/
 
-            var stepIds = [self.currentStep.id];
-            self.workflowTask.markStepsAsDone(self.currentJob.id, stepIds, settings.user,
-                function (data) {
-                    self.loadWorkflow();
-                },
-                function (error) {
-                    //self.hideProgress();
-                    //self.showError("Workflow Error", error);
-                    console.error(error);
-                }
-            );
-        },
+        /** Example 3d - Execute/mark as complete **/
 
-        checkCanRunStep: function (step) {
-            var self = lang.hitch(this);
-            self.canRunStep = false;
+        /** Documentation
+         *   - http://workflowsample.esri.com/doc/javascript/jsapi/WMWorkflowTask.html#executeSteps
+         *   - http://workflowsample.esri.com/doc/javascript/jsapi/WMWorkflowTask.html#markStepsAsDone
+         */
 
-            if (self.currentJob.assignedTo !== settings.user) {
-                return;
-            }
+        /** End example 3d **/
 
-            //Use the workflowTask to check if a step can be run or not
-            self.workflowTask.canRunStep(self.currentJob.id, step.id, settings.user,
-                function (stepStatus) {
-                    if (stepStatus == Enum.StepRunnableStatus.CAN_RUN) {
-                        self.canRunStep = true;
-                    }
-                    self.executeBtn.setDisabled(!(self.canRunStep));
-                },
-                function (error) {
-                    //self.showError("Workflow Error", error);
-                    self.executeBtn.setDisabled(true);
-                    console.error(error);
-                }
-            );
-        },
-
-        //
-        //Check if step can be marked as done
-        //
-        checkCanMarkStepAsDone: function (step) {
-            this.canMarkStepAsDone = (step.canSkip || step.hasBeenExecuted
-                || (step.stepType.executionType == Enum.StepExecutionType.PROCEDURAL)) && this.currentJob.assignedTo === settings.user;
-
-            // disable the mark as done button as needed
-            this.markBtn.setDisabled(!(this.canMarkStepAsDone));
-        }
 
     });
 

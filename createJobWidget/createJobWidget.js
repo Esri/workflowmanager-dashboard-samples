@@ -76,6 +76,7 @@ define([
             var symbol = new SimpleFillSymbol();
             this.inputGraphic = new Graphic(null, symbol);
 
+            //<editor-fold desc="Create Widgets - Example 2b is within this region">
             this.jobTypesSelect = new FilteringSelect({
                 id: "createJobTypesSelect",
                 name: "createJobTypesSelect",
@@ -110,37 +111,29 @@ define([
                 label: "Create Job",
                 style: "float: right; margin-right: 8px;",
                 onClick: function () {
-                    var para = new JobCreationParameters();
+                    /** Example 2b - Create Job **/
 
-                    para.jobTypeId = self.jobTypesSelect.get("value");
-                    para.loi = self.aoi;
-                    self.startUpScreen.style.display = "none";
-                    self.progressScreen.style.display = "";
-                    self.jobTask.createJob(para, self.userName, function (data) {
-                        var event = "\nJob: " + data[0] + " created."
-                        self.startUpScreen.style.display = "";
-                        self.progressScreen.style.display = "none";
-                        self.createHistory.set("value", self.createHistory.value + event);
-                        self.aoi = null;
-                        self.graphicsLayerProxy.clear();
+                    /** Documentation
+                     *   - http://workflowsample.esri.com/doc/javascript/jsapi/WMJobTask.html#createJob
+                     *   - http://workflowsample.esri.com/doc/rest/index.html?createjob.html
+                     */
 
-                    });
+                    /** End Example 3 **/
                 }
             }, this.btnCreateJobAttach);
             this.btnCreateJob.startup();
+            //</editor-fold>
 
-            //get and set the visible job types
-            this.wmConfigurationTask.getServiceInfo(function (response) {
-                var activeJobTypes = dojo.filter(response.jobTypes, function (item) {
-                    return item.state == Enum.JobTypeState.ACTIVE;
-                });
-                self.jobTypesSelect.set("store", new Memory({data: activeJobTypes, idProperty: "id"}));
-                if (activeJobTypes.length > 0) {
-                    self.jobTypesSelect.set("disabled", false);
-                    self.jobTypesSelect.set("value", activeJobTypes[0].id);  // by default select first item
-                    self.btnCreateJob.set("disabled", false);
-                }
-            });
+            /** Example 2a - Get and set the visible job types **/
+
+            /** Documentation
+             *   - http://workflowsample.esri.com/doc/rest/index.html?wmserver.html
+             *   - http://workflowsample.esri.com/doc/javascript/jsapi/WMConfigurationTask.html#getServiceInfo
+             *
+             *  Also a new method for just job types available to the user at 10.4
+             */
+
+            /** End Example 2a **/
 
 
             //creates the graphic layer we will work on
@@ -165,11 +158,13 @@ define([
 
             this.drawingToolbarDeactivated();
 
+            /** Example 2c - AOI **/
             this.geoService.simplify([graphic], storeAOi);
             //store the simplified for aoi
             function storeAOi(geometries) {
                 self.aoi = geometries[0];
             }
+            /** End example 2c **/
 
             this.inputGraphic.setGeometry(graphic);
             this.graphicsLayerProxy.addOrUpdateGraphic(this.inputGraphic);
