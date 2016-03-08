@@ -71,7 +71,7 @@ define([
             // The results are in the featureSet
             dataSource.executeQuery(new Query()).then(lang.hitch(this, function (featureSet) {
                 // See whether any jobs are selected
-                if (featureSet.features) {
+                if (featureSet.features && featureSet.features.length > 0) {
                     var feature = featureSet.features[0];
                     var jobId = feature.attributes[settings.jobId];
 
