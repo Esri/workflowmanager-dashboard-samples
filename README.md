@@ -31,7 +31,9 @@ Instructions
 ------------
 
 1. Download the source code and save to a local folder or clone the repository
+
 2. Edit the configuration options in config/settings.js.
+
 3. Create a new ArcGIS Online Web Map which will be the basis of your operations view.
     * This Web Map should contain the AOI layer for the Workflow Manager view
     ![Add Layer Screenshot](/doc/screenshots/AddLayer.png)
@@ -39,9 +41,11 @@ Instructions
 4.  Either
 [open Operations Dashboard in Dev Mode](https://developers.arcgis.com/javascript/jshelp/operations-dashboard-extensibility-test-debug.html)
 or [deploy the widgets for use in Operations Dashboard](https://developers.arcgis.com/javascript/jshelp/operations-dashboard-extensibility-deploy-overview.html)
+
 5. Create a new Operations View using the Web Map created earlier.
     * Turn on the option for the AOI layer to be selectable
 ![Selectable Option](/doc/screenshots/ConfigureMap.png)
+
 6. Add the widgets to the Operations View
     * When adding the Job Workflow Widget, use the Selection of the AOI layer as the Data Source
 ![Configuring Job Workflow Widget](/doc/screenshots/ConfigureJobWorkflowWidget.png)
