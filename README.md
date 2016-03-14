@@ -25,7 +25,7 @@ This widget allows you to create new jobs of any active Job Type, with an option
 This widget allows you to select an AOI on the map and see the name and workflow of the selected job.
 It also allows you to execute or mark steps as complete when allowed.
 
-![Job Workflow Widget Screenshot](/docs/screenshots/JobWorkflowWidget.png)
+![Job Workflow Widget Screenshot](/doc/screenshots/JobWorkflowWidget.png)
 
 Instructions
 ------------
