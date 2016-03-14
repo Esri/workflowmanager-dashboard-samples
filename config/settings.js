@@ -2,13 +2,13 @@ define([], function () {
     "use strict";
     return {
         // Common settings
-        serverUrl: "http://kevinb:6080/arcgis/rest/services/advanced/WMServer",
+        serverUrl: "http://workflowsample.esri.com/arcgis/rest/services/Workflow/WMServer",
         geoServerUrl: "http://tasks.arcgisonline.com/ArcGIS/rest/services/Geometry/GeometryServer",
-        userName: "kevi6083",
+        userName: "demo",
 
         // Report settings
-        queryID: 2008,
+        queryID: 1,
         currentCategorizedByValue: 2,
-        jobId: "sde.jtx2.JTX_JOBS_AOI.job_id"
+        jobId: "sde.wmx.JTX_JOBS_AOI.job_id"
     };
 });
