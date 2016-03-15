@@ -49,7 +49,7 @@ define([
 
         /** Documentation
          *   - http://workflowsample.esri.com/doc/rest/index.html?queryjobs.html
-         *   - http://workflowsample.esri.com/doc/javascript/jsapi/WMJobTask.html#queryJobsByID
+         *   - http://workflowsample.esri.com/doc/javascript/jsapi/WMJobTask.html
          **/
 
         getJobsByQueryID: function (queryID) {

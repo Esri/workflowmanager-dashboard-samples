@@ -84,7 +84,7 @@ define([
                     /** Example 3a - Retrieve basic job info **/
 
                     /** Documentation
-                     *  - http://workflowsample.esri.com/doc/javascript/jsapi/WMJobTask.html#getJob
+                     *  - http://workflowsample.esri.com/doc/javascript/jsapi/WMJobTask.html
                      *  - http://workflowsample.esri.com/doc/rest/index.html?queryjobs.html
                      */
 
@@ -112,8 +112,8 @@ define([
             /** Example 3b - Get Workflow Image and current steps **/
 
             /** Documentation
-             *   - http://workflowsample.esri.com/doc/javascript/jsapi/WMWorkflowTask.html#getWorkflowImageURL
-             *   - http://workflowsample.esri.com/doc/javascript/jsapi/WMWorkflowTask.html#getCurrentSteps
+             *   - http://workflowsample.esri.com/doc/javascript/jsapi/WMWorkflowTask.html
+             *   - http://workflowsample.esri.com/doc/javascript/jsapi/WMWorkflowTask.html
              */
 
             var jobId = self.currentJob.id;
@@ -150,7 +150,7 @@ define([
         /** Example 3c - Enable/disable buttons **/
 
         /** Documentation
-         *   - http://workflowsample.esri.com/doc/javascript/jsapi/WMWorkflowTask.html#canRunStep
+         *   - http://workflowsample.esri.com/doc/javascript/jsapi/WMWorkflowTask.html
          */
 
         checkCanRunStep: function (step) {
@@ -192,8 +192,8 @@ define([
         /** Example 3d - Execute/mark as complete **/
 
         /** Documentation
-         *   - http://workflowsample.esri.com/doc/javascript/jsapi/WMWorkflowTask.html#executeSteps
-         *   - http://workflowsample.esri.com/doc/javascript/jsapi/WMWorkflowTask.html#markStepsAsDone
+         *   - http://workflowsample.esri.com/doc/javascript/jsapi/WMWorkflowTask.html
+         *   - http://workflowsample.esri.com/doc/javascript/jsapi/WMWorkflowTask.html
          */
 
         executeStep: function () {

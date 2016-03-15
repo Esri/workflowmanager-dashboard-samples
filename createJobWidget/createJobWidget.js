@@ -112,7 +112,7 @@ define([
                     /** Example 2b - Create Job **/
 
                     /** Documentation
-                     *   - http://workflowsample.esri.com/doc/javascript/jsapi/WMJobTask.html#createJob
+                     *   - http://workflowsample.esri.com/doc/javascript/jsapi/WMJobTask.html
                      *   - http://workflowsample.esri.com/doc/rest/index.html?createjob.html
                      */
 
@@ -148,7 +148,7 @@ define([
 
             /** Documentation
              *   - http://workflowsample.esri.com/doc/rest/index.html?wmserver.html
-             *   - http://workflowsample.esri.com/doc/javascript/jsapi/WMConfigurationTask.html#getServiceInfo
+             *   - http://workflowsample.esri.com/doc/javascript/jsapi/WMConfigurationTask.html
              *
              *  Also a new method for just job types available to the user at 10.4
              */
