@@ -82,5 +82,5 @@ limitations under the License.
 
 A copy of the license is available in the repository's [license.txt]( https://raw.github.com/Esri/workflowmanager-dashboard-samples/master/license.txt) file.
 
-[](Esri Tags: ArcGIS Workflow Manager Operations Dashboard)
+[](Esri Tags: ArcGIS Workflow Manager WorkflowManager Operations Dashboard)
 [](Esri Language: JavaScript)
