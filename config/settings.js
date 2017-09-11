@@ -24,8 +24,12 @@ define([], function () {
         userName: "demo",
 
         // Report settings
-        queryID: 1,
+        queryID: 401,
         currentCategorizedByValue: 2,
-        jobId: "sde.wmx.JTX_JOBS_AOI.job_id"
+
+        // Job details settings
+        // This is the field name from the AOI feature service.
+        // It may need to be fully qualified depending on how the service was published
+        jobId: "job_id"
     };
 });
